@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import List from './list';
 import AddItem from './add_item';
 import dummyList from "../data/to-do-list";
+import {randomString} from '../helpers';
 
 class App extends Component {
     state = {
@@ -17,8 +18,10 @@ class App extends Component {
     addItem = (item) => {
         const {list} = this.state;
 
+        item._id = randomString();
+
         this.setState({
-            list: [item, ...list]
+            list: [{...item, _id: randomString()}, ...list]
         });
     }
 
