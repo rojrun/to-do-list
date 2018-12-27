@@ -7,7 +7,6 @@ export default (props) => {
             {/*<form action="#">*/}
                 {/*<label className="col s8 ">*/}
                     {/*<input onClick={props.put} type="checkbox"/>*/}
-                    {/*/!*<span>Complete</span>*!/*/}
                 {/*</label>*/}
             {/*</form>*/}
             <div className="col s10">
