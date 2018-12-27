@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import NavButton from './nav_button';
 
 class AddItem extends Component {
     state = {
@@ -6,10 +7,10 @@ class AddItem extends Component {
         details: ''
     }
 
-    handleSaveItem = (e) => {
+    handleSaveItem = async (e) => {
         e.preventDefault();
-        this.props.add(this.state);
-        this.reset();
+        await this.props.add(this.state);
+        this.props.history.push('/');
     }
 
     reset = () => {
@@ -21,29 +22,34 @@ class AddItem extends Component {
 
     render(){
         const {title, details}= this.state;
+        console.log("add item props: ", this.props);
         return (
-            <form onSubmit={this.handleSaveItem}>
-                <div className="row">
-                    <div className="input-field col s8 offset-s2">
-                        <input onChange={(e) => this.setState({title: e.target.value})} value={title} id="title" type="text" name="title" autoComplete="off"/>
-                        <label htmlFor="title">Title</label>
+            <div>
+                <h1 className="center">Add To Do Item</h1>
+                <NavButton to="/" text="Back to List" color="purple"/>
+                <form onSubmit={this.handleSaveItem}>
+                    <div className="row">
+                        <div className="input-field col s8 offset-s2">
+                            <input onChange={(e) => this.setState({title: e.target.value})} value={title} id="title" type="text" name="title" autoComplete="off"/>
+                            <label htmlFor="title">Title</label>
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="input-field col s8 offset-s2">
-                        <input onChange={(e) => this.setState({details: e.target.value})} value={details} id="details" type="text" name="details" autoComplete="off"/>
-                        <label htmlFor="details">Details</label>
+                    <div className="row">
+                        <div className="input-field col s8 offset-s2">
+                            <input onChange={(e) => this.setState({details: e.target.value})} value={details} id="details" type="text" name="details" autoComplete="off"/>
+                            <label htmlFor="details">Details</label>
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col s6 center">
-                        <button onClick={this.reset} type="button" className="btn red waves-effect">Cancel</button>
+                    <div className="row">
+                        <div className="col s6 center">
+                            <button onClick={this.reset} type="button" className="btn red waves-effect">Cancel</button>
+                        </div>
+                        <div className="col s6 center">
+                            <button  className="btn green waves-effect waves-light">Add Item</button>
+                        </div>
                     </div>
-                    <div className="col s6 center">
-                        <button  className="btn green waves-effect waves-light">Add Item</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         );
     }
 }
